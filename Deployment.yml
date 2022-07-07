@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gradle-deployment
+  labels:
+    app: denis
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: denis
+  template:
+    metadata:
+      labels:
+        app: denis
+    spec:
+      containers:
+      - name: gradle
+        image: andreitirban/desvopsdemo:gradle1.0
+        ports:
+        - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: gradle-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: denis
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

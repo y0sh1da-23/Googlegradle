@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gradle-service
+spec:
+  selector:
+    app: denis
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
